@@ -1,3 +1,3 @@
 # Crafter
 
-use TikaExtractor 
+use TikaExtractor # jina_QAfromPDF_example
