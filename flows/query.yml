@@ -1,0 +1,6 @@
+!Flow
+pods:
+  encoder:
+    uses: "jinaai/hub.executors.encoders.nlp.transformers-pytorch"
+  indexer:
+    uses: pods/index.yml 

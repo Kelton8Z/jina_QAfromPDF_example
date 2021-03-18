@@ -1,0 +1,3 @@
+# Crafter
+
+use TikaExtractor 
