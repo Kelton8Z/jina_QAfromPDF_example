@@ -2,32 +2,47 @@
 from jina.hub.segmenters.nlp.PDFExtractorSegmenter import PDFExtractorSegmenter
 
 from jina.flow import Flow
+from jina import Document
 import click
 import os
+from jina.hub.segmenters.nlp.PDFExtractorSegmenter import PDFExtractorSegmenter
+from jina.hub.segmenters.nlp.Sentencizer import Sentencizer
+from jina.hub.encoders.nlp.TransformerTFEncoder import TransformerTFEncoder
+
+TRANSFORMED_ = '''
+def input_fn():
+    print("file processed")
+    segmenter = PDFExtractorSegmenter()
+    segmentedPDFChunks = segmenter.segment(uri='/Users/kel/Downloads/EngineerOnboardingGuide.pdf',buffer=None)
+    txt = segmentedPDFChunks[-1]
+
+    sentencizer = Sentencizer()
+    sentencized = sentencizer.segment(txt)
+
+    transformerTFEncoder = TransformerTFEncoder()
+
+    for sentences in sentencized:
+        transformed = transformerTFEncoder.encode(sentences)
+        print(transformed)'''
+
 
 def config():
     os.environ.setdefault('JINA_WORKSPACE', './workspace')
     os.environ.setdefault('JINA_PORT', str(65481))
+    #os.environ.setdefault('')
 
 def input_fn():
-    print("file processed")
-    segmenter = PDFExtractorSegmenter()
-    segmentedPDFChunks = segmenter.segment(uri='/Users/kel/Downloads/Engineer\ Onboarding\ Guide.pdf',buffer=None)
-    img = segmentedPDFChunks[0]
-    txt = segmentedPDFChunks[1]
-    print(type(txt))
-    '''with Document() as d:
-	d.tags = img
-        d.tags = txt
-    yield d
-    '''
+    with open('/Users/candice/Downloads/EngineerOnboardingGuide.pdf') as f:
+        d = Document(f)
+        for
+            yield d
 
 def index():
     print("indexed")
     f = Flow().load_config("flows/index.yml")
-
+    # f = Flow().add(name='pdf_segmenter', uses=
     with f:
-        f.index(input_Fn)
+        f.index(input_fn)
 
 #def printTopK():
 

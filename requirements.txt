@@ -1,1 +1,6 @@
-jina==1.0.9
+jina==1.0.10
+PyPDF2==1.26.0
+PyMuPDF==1.18.5
+Pillow==8.0.1
+transformers==4.1.1
+tensorflow-cpu==2.4.0

@@ -1,8 +1,11 @@
 !Flow
 version: '1.0'
+with:
+  timeout_ready: -1
 pods:
-  - name: encoder
-    uses: docker://jinaai/hub.hub.executors.encoders.nlp.transformers-pytorch:latest
+  - uses: pods/segmenter.yml #PDFExtractorSegmenter
+  - uses: Sentencizer
+  - uses: pods/encode.yml #docker://jinahub/pod.encoder.transformertfencoder:0.0.19-1.0.13
   - name: indexer
     uses: 
       - pods/index.yml

@@ -1,6 +1,10 @@
 !Flow
+with:
+  timeout_ready: -1
+  #rest_api: true
+  #port_expose: 45678
 pods:
   encoder:
-    uses: "jinaai/hub.executors.encoders.nlp.transformers-pytorch"
+    uses: pods/encode.yml #docker://jinahub/pod.encoder.transformertfencoder:0.0.19-1.0.13
   indexer:
     uses: pods/index.yml 
